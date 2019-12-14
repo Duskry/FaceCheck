@@ -1,6 +1,5 @@
 package com.ren.face.acitivity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,7 +24,7 @@ import android.widget.Toast;
 
 import com.ren.face.R;
 import com.ren.face.bean.Student;
-import com.ren.face.service.Myhandler;
+import com.ren.face.handler.Myhandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,7 +36,6 @@ import butterknife.ButterKnife;
 
 import static com.ren.face.constant.Constant.REQ_ALU_CODE;
 import static com.ren.face.constant.Constant.REQ_PIC_CODE;
-import static com.ren.face.service.Face.addFace;
 import static com.ren.face.service.Face.runUpload;
 import static com.ren.face.utils.ImageUtil.getBitmapFormUri;
 
@@ -57,6 +54,10 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.upload)
     Button upload;
+
+
+    @BindView(R.id.button4)
+    Button button4;
 
     Uri imageUri;
 
@@ -78,6 +79,12 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
         addByAul.setOnClickListener(this);
         addByPic.setOnClickListener(this);
 
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +103,8 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

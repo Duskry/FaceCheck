@@ -1,4 +1,4 @@
-package com.ren.face.service;
+package com.ren.face.handler;
 
 import android.content.Context;
 import android.os.Handler;
@@ -7,10 +7,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.ren.face.bean.Student;
+import com.ren.face.dao.StudentDao;
+
 public class SearchHandler extends Handler {
     private Context context;
-    public SearchHandler(Context context){
+    StudentDao studentDao;
+    Student student;
+    public SearchHandler(Context context,Student student){
         this.context = context;
+        studentDao = new StudentDao(context);
+        this.student = student;
     }
 
     @Override
@@ -20,6 +27,7 @@ public class SearchHandler extends Handler {
             case 0:{
                 Toast.makeText(context,"匹配成功",Toast.LENGTH_SHORT).show();
                 //  打卡成功  应该写入 数据库
+                studentDao.insertTime(student);
                 //  账户  名字   时间
                 break;
             }

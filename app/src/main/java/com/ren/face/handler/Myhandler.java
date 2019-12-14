@@ -1,4 +1,4 @@
-package com.ren.face.service;
+package com.ren.face.handler;
 
 import android.content.Context;
 import android.os.Handler;
@@ -6,8 +6,6 @@ import android.os.Message;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
-import com.ren.face.acitivity.RegisterFace;
 
 public class Myhandler extends Handler {
     private Context context;

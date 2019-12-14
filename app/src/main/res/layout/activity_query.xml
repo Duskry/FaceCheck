@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".acitivity.QueryActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/querytoday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询今天打卡的人员" />
+
+        <Button
+            android:id="@+id/queryaccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按账户查询打卡信息" />
+
+        <Button
+            android:id="@+id/querybydate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="chooseTime"
+            android:text="选择日历查询人员" />
+
+        <TextView
+            android:id="@+id/datetext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

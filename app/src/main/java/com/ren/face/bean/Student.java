@@ -1,6 +1,5 @@
 package com.ren.face.bean;
 
-import android.os.Parcelable;
 
 import java.io.Serializable;
 

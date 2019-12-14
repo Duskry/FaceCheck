@@ -16,7 +16,7 @@ public class FaceHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String account_tb="create table t_account (id integer  primary key AUTOINCREMENT ,account text,name text,pwd text,role integer)";
-        String time_tb="create table t_time(account text ,time text)";
+        String time_tb="create table t_time(checkid integer primary key autoincrement ,account text ,name text,checktime time)";
         db.execSQL(account_tb);
         db.execSQL(time_tb);
     }

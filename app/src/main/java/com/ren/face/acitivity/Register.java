@@ -45,10 +45,10 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 studentDao.insertAccount(account.getText().toString(),name.getText().toString(),pwd.getText().toString(),Integer.parseInt(role.getText().toString()));
                 Toast.makeText(v.getContext(),"注册成功",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(v.getContext(),Menu.class);
+              /*  Intent intent = new Intent(v.getContext(),Menu.class);
                 intent.putExtra("role",Integer.parseInt(role.getText().toString()));
                 intent.putExtra("name",name.getText().toString());
-                startActivity(intent);
+                startActivity(intent);*/
                 finish();
             }
         });

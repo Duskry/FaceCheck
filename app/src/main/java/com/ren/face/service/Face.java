@@ -104,6 +104,7 @@ public class Face {
                     // 相识度大于90 才认为 是本人
                     if(userListBean.getScore()>90)
                         message.what=0;
+
                 }
             }else{
                 message.what=code;
