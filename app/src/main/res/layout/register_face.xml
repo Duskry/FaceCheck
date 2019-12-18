@@ -8,39 +8,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/addbyPic"
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拍照添加" />
+            android:text="添加制定账号(默认是登录账号)     "
+            android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/addbyAul"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="相册添加" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="名字" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addaccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="账号" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addbyPic"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableStart="@drawable/camera_add"
+                android:gravity="center"
+                android:text=" 拍照添加" />
+
+            <Button
+                android:id="@+id/addbyAul"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableStart="@drawable/folder"
+                android:gravity="center"
+                android:text=" 相册添加" />
+
+            <Button
+                android:id="@+id/addbyfile"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableStart="@drawable/usb"
+                android:gravity="center"
+                android:text=" 文件添加" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/addfaceimg"
             android:layout_width="match_parent"
-            android:layout_height="261dp"
+            android:layout_height="357dp"
             android:scaleType="centerInside" />
 
         <Button
             android:id="@+id/upload"
-            style="@android:style/Widget.Material.Button"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/upload"
             android:text="上传" />
 
-        <Button
-            android:id="@+id/button4"
-            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

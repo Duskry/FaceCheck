@@ -1,26 +1,31 @@
 package com.ren.face.acitivity;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ren.face.R;
 import com.ren.face.bean.Student;
+import com.ren.face.handler.Deletehandler;
+import com.ren.face.handler.Gethandler;
 import com.ren.face.handler.SearchHandler;
 
 import java.io.FileNotFoundException;
@@ -28,38 +33,49 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.ren.face.constant.Constant.REQ_ALU_CODE;
 import static com.ren.face.constant.Constant.REQ_PIC_CODE;
+import static com.ren.face.constant.Constant.ROLE_ADMIN;
+import static com.ren.face.constant.Constant.ROLE_STUDENT;
+import static com.ren.face.constant.Constant.ROLE_TEACHER;
+import static com.ren.face.service.Face.runDelete;
+import static com.ren.face.service.Face.runGet;
 import static com.ren.face.service.Face.runSerach;
 import static com.ren.face.utils.ImageUtil.getBitmapFormUri;
 
+/**
+ *
+ *   菜单
+ *
+ */
 public class Menu extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Menu:";
 
     //@BindView(R.id.registerface)
-    Button regface;
+    TextView regface;
 
     //@BindView(R.id.query)
-    Button query;
+    TextView query;
+
+    TextView delete;
+
 
     //@BindView(R.id.check_in_pic)
-    Button inByPic;
+    TextView inByPic;
 
     //@BindView(R.id.check_in_byal)
-    Button inByAlbum;
+    TextView inByAlbum;
 
-    //@BindView(R.id.welcometext)
-    TextView welcome;
 
     Student student;
 
 
     Handler handler;
 
+
+    Handler  getHandler;
 
     Uri imageUri;
 
@@ -74,6 +90,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.menu);
         //ButterKnife.bind(this);
 
+        delete = findViewById(R.id.deleteface);
 
         regface = findViewById(R.id.registerface);
 
@@ -81,22 +98,24 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
 
         inByPic = findViewById(R.id.check_in_pic);
 
-
         inByAlbum = findViewById(R.id.check_in_byal);
 
         imageView = findViewById(R.id.image);
 
-        welcome = findViewById(R.id.welcometext);
         Intent now = getIntent();
         if (now != null) {
             student = (Student) now.getSerializableExtra("student");
             handler = new SearchHandler(this, student);
-            welcome.setText(student.getName());
         }
+        getHandler = new Gethandler(this,student);
         Log.i(TAG, "onCreate: 权限是" + student.getRole());
         // 隐藏不该有的控件
         shouldVisble(student.getRole());
 
+        Student student1 = student;
+
+
+        runGet(getHandler,student1);
         /*
 
         监听器
@@ -114,16 +133,22 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
 
         regface.setOnClickListener(this);
 
+        delete.setOnClickListener(this);
+
 
     }
 
+    /*
+      权限 是否可视
+     */
     private void shouldVisble(Integer role) {
         switch (role) {
-            case 3:
-            case 2:
+            case ROLE_ADMIN:
+            case ROLE_TEACHER:
                 break;
             // 学生
-            case 1: {
+            case ROLE_STUDENT: {
+                // 简单做了一下  这里需要修改一下 有些还没隐藏
                 regface.setVisibility(View.INVISIBLE);
                 query.setVisibility(View.INVISIBLE);
                 break;
@@ -146,13 +171,14 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
             }
             // 拍照导入
             case R.id.check_in_pic: {
+                // 动态申请权限
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
 
-                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                /*StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                 StrictMode.setVmPolicy(builder.build());
-                builder.detectFileUriExposure();            //7.0拍照必加
+                builder.detectFileUriExposure();            //7.0拍照必加*/
 
                 Intent openFileIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 openFileIntent.putExtra(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
@@ -168,9 +194,32 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
                 break;
             }
             case R.id.registerface: {
+
                 Intent intent = new Intent(Menu.this, RegisterFace.class);
                 intent.putExtra("student", student);
                 startActivity(intent);
+                break;
+            }
+            case  R.id.deleteface:{
+                final EditText editText = new EditText(this);
+                editText.setHint("账户");
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(this).setTitle("删除用户").setView(editText)
+                        .setMessage("请注意，删除会删除用户的全部人脸！")
+                        .setPositiveButton("删除人脸", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                runDelete(new Deletehandler(Menu.this), editText.getText().toString());
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                builder.create().show();
+                break;
             }
         }
     }
@@ -186,8 +235,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG, "onActivityResult: " + imageUri);
 
             try {
-                // 源图 bitMap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                // 需要进行图片压缩 
+                // 原图 bitMap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                // 需要进行图片压缩
                 bitMap = getBitmapFormUri(imageUri, this);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

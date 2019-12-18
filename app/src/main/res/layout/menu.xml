@@ -11,43 +11,154 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="每日一词"
+            android:textSize="16dp" />
 
-        <Button
-            android:id="@+id/check_in_byal"
+        <com.jinrishici.sdk.android.view.JinrishiciTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/jinrisiciTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="相册导入 打卡" />
+            android:textColor="#FF9800"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent" />
 
         <TextView
-            android:id="@+id/welcometext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/check_in_pic"
+            android:id="@+id/tip1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="相机 打卡" />
+            android:text="考勤打卡"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"/>
 
-        <Button
-            android:id="@+id/registerface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="录入脸" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/query"
+            <TextView
+                android:id="@+id/check_in_byal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/pic"
+                android:gravity="center"
+                android:text="相册导入"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/check_in_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:drawableTop="@drawable/camera"
+                android:gravity="center"
+                android:text="拍照导入"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tip2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="查询" />
+            android:text="录入数据"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/registerface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:drawableTop="@drawable/edit"
+                android:gravity="center"
+                android:lineSpacingExtra="8sp"
+                android:text="添加人脸"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/deleteface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:drawableTop="@drawable/delete"
+                android:gravity="center"
+                android:lineSpacingExtra="8sp"
+                android:text="删除人脸"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tip3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="数据操作"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:drawableTop="@drawable/data"
+                android:gravity="center"
+                android:text="查询数据"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent" />
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

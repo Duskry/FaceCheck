@@ -1,6 +1,5 @@
 package com.ren.face.constant;
 
-import android.content.Intent;
 
 public class Constant {
 
@@ -24,9 +23,19 @@ public class Constant {
     public static final String FACE_GROUP = "student_check";
 
 
+    public static final String GET_USER_LIST_URL = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/group/getusers";
+
+
+    public static final String DEL_USER_URL= "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/delete";
+
+
+
+
 
     /**
+     *
      * 数据库创建管理
+     *
      */
     public static final String db_name="face_db";
 
@@ -40,6 +49,7 @@ public class Constant {
     /**
      *
      * 登录请求
+     *
      */
 
     public static final Integer REQ_CODE_RES = 111;
@@ -49,14 +59,38 @@ public class Constant {
 
 
     /**
+     *
      *  调用 相册相机
+     *
      */
     public static final Integer REQ_PIC_CODE = 333;
 
     public static final Integer REQ_ALU_CODE= 444;
 
 
+    /**
+     *
+     *   权限代码
+     *
+     */
+
+    public static final int ERR = 0;
+
+    public static final int ROLE_STUDENT =1;
+
+    public static  final int ROLE_TEACHER =2;
+
+    public static final int ROLE_ADMIN = 3;
 
 
+    /**
+     *
+     *  日期查询
+     *
+     */
+
+    public static final int TYPE_YEAR_MONTH = 1;
+
+    public static final int TYPE_YEAR_MONTH_DAY = 0;
 
 }

@@ -19,7 +19,7 @@ import java.io.InputStream;
 public class ImageUtil {
 
     // 图片最大尺寸 单位为KB
-    private static final Integer MAX_SIZE = 300;
+    private static final Integer MAX_SIZE = 100;
 
 
     public static Bitmap getBitmapFormUri(Uri uri, Context context) throws FileNotFoundException, IOException {

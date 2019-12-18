@@ -7,6 +7,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+
+/**
+ *   上传人脸的回调类
+ */
 public class Myhandler extends Handler {
     private Context context;
     public Myhandler(Context context){
@@ -20,6 +24,7 @@ public class Myhandler extends Handler {
                 Toast.makeText(context,"上传成功",Toast.LENGTH_SHORT).show();
                 break;
             }
+            // 百度的人脸识别错误码
             case 223105:{
                 Toast.makeText(context,"已经有你的图片了",Toast.LENGTH_SHORT).show();
                 break;

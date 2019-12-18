@@ -17,15 +17,24 @@ import android.widget.Toast;
 import com.ren.face.acitivity.Menu;
 import com.ren.face.acitivity.Register;
 import com.ren.face.bean.Student;
+import com.ren.face.constant.Constant;
 import com.ren.face.dao.StudentDao;
 import com.ren.face.database.FaceHelper;
 
+import static com.ren.face.constant.Constant.ERR;
 import static com.ren.face.constant.Constant.REQ_CODE_RES;
 import static com.ren.face.constant.Constant.RES_CODE_RES;
+import static com.ren.face.constant.Constant.ROLE_ADMIN;
+import static com.ren.face.constant.Constant.ROLE_STUDENT;
+import static com.ren.face.constant.Constant.ROLE_TEACHER;
 
+
+/**
+ *  登录首页类
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private final static String TAG="main";
+    private final  String TAG=getClass().getSimpleName();
 
     EditText account;
 
@@ -73,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void login(){
         if(account.getText()!=null && pwd.getText()!=null){
             // 密码及权限校验
-
             Integer rscode=studentDao.isRight(account.getText().toString(),pwd.getText().toString());
             Intent intent = new Intent(this, Menu.class);
             Student student = studentDao.getStudent(account.getText().toString());
@@ -81,19 +89,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("student", student);
             switch (rscode){
                 // 超级管理
-                case 3:{
+                case ROLE_ADMIN:{
 
                 }
                 //  老师
-                case 2:{
+                case ROLE_TEACHER:{
 
                 }
                 // 学生
-                case 1:{
+                case ROLE_STUDENT:{
                     startActivity(intent);
                     break;
                 }
-                case 0:{
+                // 错误
+                case ERR:{
                     Toast.makeText(this,"你的密码错误",Toast.LENGTH_LONG).show();
                     break;
                 }

@@ -14,6 +14,11 @@ import com.ren.face.dao.StudentDao;
 
 import static com.ren.face.constant.Constant.RES_CODE_RES;
 
+/**
+ *
+ *   注册
+ */
+
 public class Register extends AppCompatActivity {
 
 
@@ -45,6 +50,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 studentDao.insertAccount(account.getText().toString(),name.getText().toString(),pwd.getText().toString(),Integer.parseInt(role.getText().toString()));
                 Toast.makeText(v.getContext(),"注册成功",Toast.LENGTH_LONG).show();
+                // 可以直接跳转主界面 但是传值有点问题
               /*  Intent intent = new Intent(v.getContext(),Menu.class);
                 intent.putExtra("role",Integer.parseInt(role.getText().toString()));
                 intent.putExtra("name",name.getText().toString());

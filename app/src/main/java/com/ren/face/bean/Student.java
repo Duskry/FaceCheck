@@ -49,4 +49,14 @@ public class Student implements Serializable {
     public void setRole(Integer role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }

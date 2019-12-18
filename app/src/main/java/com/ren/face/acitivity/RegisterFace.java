@@ -18,10 +18,15 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.ren.face.R;
 import com.ren.face.bean.Student;
 import com.ren.face.handler.Myhandler;
@@ -39,6 +44,12 @@ import static com.ren.face.constant.Constant.REQ_PIC_CODE;
 import static com.ren.face.service.Face.runUpload;
 import static com.ren.face.utils.ImageUtil.getBitmapFormUri;
 
+
+/**
+ *
+ * 人脸注册类
+ *
+ */
 public class RegisterFace extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterFace";
@@ -53,11 +64,19 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
     ImageView imageView;
 
     @BindView(R.id.upload)
-    Button upload;
+    TextView upload;
 
 
-    @BindView(R.id.button4)
-    Button button4;
+    @BindView(R.id.switch1)
+    SwitchMaterial aSwitch;
+
+
+    @BindView(R.id.addaccount)
+    EditText addaccount;
+
+    @BindView(R.id.addname)
+    EditText addbname;
+
 
     Uri imageUri;
 
@@ -65,26 +84,30 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
 
     Student student;
 
-
-    ProgressBar progressBar;
-
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_face);
         ButterKnife.bind(this);
         student = (Student) getIntent().getSerializableExtra("student");
+        Log.d(TAG, "onCreate: "+student);
         handler= new Myhandler(this);
         addByAul.setOnClickListener(this);
         addByPic.setOnClickListener(this);
-
-        button4.setOnClickListener(new View.OnClickListener() {
+        invisible();
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    visible();
+                }else{
+                    invisible();
+                }
             }
         });
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +118,12 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(RegisterFace.this,"正在上传",Toast.LENGTH_SHORT).show();
+                            // 如果是自定义账号
+                            if(!addaccount.getText().toString().equals("")&& !addbname.getText().equals("")){
+                                student.setAccount(addaccount.getText().toString());
+                                student.setName(addbname.getText().toString());
+                            }
+                            Log.d(TAG, "onClick: 上传图片的"+student.getName()+"上传图片的account"+student.getAccount());
                             runUpload(student.getName(),student.getAccount(),bitMap,handler);
                         }
                     }).setNegativeButton("否",null).show();
@@ -125,7 +154,7 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
             }
 
             imageView.setImageBitmap(bitMap);
-
+            imageView.setRotation(270);
 
             //  拍照上传 图片
            //  runUpload(student.getName(),student.getAccount(),bitMap);
@@ -147,6 +176,7 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
 
             // 相册上传图片
             imageView.setImageBitmap(bitMap);
+            imageView.setRotation(270);
         }
     }
 
@@ -185,5 +215,15 @@ public class RegisterFace extends AppCompatActivity implements View.OnClickListe
                 break;
             }
         }
+    }
+
+
+    private void invisible(){
+        addaccount.setVisibility(View.INVISIBLE);
+        addbname.setVisibility(View.INVISIBLE);
+    }
+    private void visible(){
+        addaccount.setVisibility(View.VISIBLE);
+        addbname.setVisibility(View.VISIBLE);
     }
 }

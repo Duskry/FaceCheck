@@ -15,11 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".acitivity.RegisterFace"></activity>
-        <activity android:name=".acitivity.QueryActivity" />
-        <activity android:name=".acitivity.Menu" />
+        <activity android:name=".acitivity.Delete"></activity>
+        <activity
+            android:name=".acitivity.RegisterFace"
+            android:label="添加人脸信息" />
+        <activity
+            android:name=".acitivity.QueryActivity"
+            android:label="查询" />
+        <activity
+            android:name=".acitivity.Menu"
+            android:label="菜单" />
         <activity android:name=".acitivity.Register" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="Face">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
