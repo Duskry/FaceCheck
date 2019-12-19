@@ -108,10 +108,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 default:break;
             }
-
         }else {
             Toast.makeText(this,"账号或者密码为空",Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 重新获取 resume
+        studentDao = new StudentDao(this);
     }
 
     @Override

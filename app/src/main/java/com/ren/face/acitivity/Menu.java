@@ -149,6 +149,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
             // 学生
             case ROLE_STUDENT: {
                 // 简单做了一下  这里需要修改一下 有些还没隐藏
+                delete.setVisibility(View.INVISIBLE);
                 regface.setVisibility(View.INVISIBLE);
                 query.setVisibility(View.INVISIBLE);
                 break;
